@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+package ticket_base;
+
+option go_package = "campus_acticity_ticketing_system/ticket_base/internal/proto";
+
+message School {
+    int64 id = 1;
+    string name = 2;
+    string code = 3;
+    string latitude = 4;
+    string longitude = 5;
+    int64 created_time = 6;
+    int64 updated_time = 7;
+    bool status = 8;
+}
+
+service SchoolService {
+    rpc Create(School) returns (School) {}
+    rpc Update(School) returns (School) {}
+    rpc Delete(IdRequest) returns (EmptyResponse) {}
+    rpc GetById(IdRequest) returns (School) {}
+    rpc List(ListRequest) returns (SchoolListResponse) {}
+}
+
+message IdRequest {
+    int64 id = 1;
+}
+
+message EmptyResponse {}
+
+message ListRequest {
+    int32 page = 1;
+    int32 page_size = 2;
+}
+
+message SchoolListResponse {
+    repeated School items = 1;
+    int32 total = 2;
+}

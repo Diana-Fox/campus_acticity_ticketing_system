@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package ticket_item;
+
+option go_package = "campus_acticity_ticketing_system/ticket_base/proto";
+
+import "ticket_item/item_messages.proto";
+import "ticket_item/item_comment_messages.proto";
+import "ticket_item/place_messages.proto";
+import "ticket_item/place_seat_messages.proto";
+
+service TicketItemService {
+  rpc GetItemById(GetItemByIdRequest) returns (GetItemByIdResponse) {}
+  rpc GetItemCommentsByItemId(GetItemCommentsByItemIdRequest) returns (GetItemCommentsByItemIdResponse) {}
+  rpc GetPlaceById(GetPlaceByIdRequest) returns (GetPlaceByIdResponse) {}
+  rpc GetPlaceSeatsByActivityId(GetPlaceSeatsByActivityIdRequest) returns (GetPlaceSeatsByActivityIdResponse) {}
+}

@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+package ticket_base;
+
+option go_package = "campus_acticity_ticketing_system/ticket_base/internal/proto";
+
+message Area {
+    int64 id = 1;
+    string name = 2;
+    string parent = 3;
+    int32 level = 4;
+    int32 is_hot = 5;
+    int64 created_time = 6;
+    int64 updated_time = 7;
+    bool status = 8;
+}
+
+service AreaService {
+    rpc Create(Area) returns (Area) {}
+    rpc Update(Area) returns (Area) {}
+    rpc Delete(IdRequest) returns (EmptyResponse) {}
+    rpc GetById(IdRequest) returns (Area) {}
+    rpc List(ListRequest) returns (AreaListResponse) {}
+}
+
+message IdRequest {
+    int64 id = 1;
+}
+
+message EmptyResponse {}
+
+message ListRequest {
+    int32 page = 1;
+    int32 page_size = 2;
+}
+
+message AreaListResponse {
+    repeated Area items = 1;
+    int32 total = 2;
+}

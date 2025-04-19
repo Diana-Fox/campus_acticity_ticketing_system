@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+package ticket_base;
+
+option go_package = "campus_acticity_ticketing_system/ticket_base/internal/proto";
+
+message Image {
+    int64 id = 1;
+    string img_url = 2;
+    int32 target_id = 3;
+    int32 sort = 4;
+    int32 type = 5;
+    int32 category = 6;
+    int64 created_time = 7;
+    int64 updated_time = 8;
+    bool status = 9;
+}
+
+service ImageService {
+    rpc Create(Image) returns (Image) {}
+    rpc Update(Image) returns (Image) {}
+    rpc Delete(IdRequest) returns (EmptyResponse) {}
+    rpc GetById(IdRequest) returns (Image) {}
+    rpc List(ListRequest) returns (ImageListResponse) {}
+}
+
+message IdRequest {
+    int64 id = 1;
+}
+
+message EmptyResponse {}
+
+message ListRequest {
+    int32 page = 1;
+    int32 page_size = 2;
+}
+
+message ImageListResponse {
+    repeated Image items = 1;
+    int32 total = 2;
+}

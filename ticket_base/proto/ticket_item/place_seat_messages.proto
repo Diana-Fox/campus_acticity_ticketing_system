@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package ticket_item;
+
+option go_package = "campus_acticity_ticketing_system/ticket_base/proto";
+
+message PlaceSeat {
+  int64 id = 1;
+  int32 x = 2;
+  int32 y = 3;
+  int64 activity_id = 4;
+  int32 sort = 5;
+  int32 state = 6;
+  string created_time = 7;
+  string updated_time = 8;
+  bool status = 9;
+}

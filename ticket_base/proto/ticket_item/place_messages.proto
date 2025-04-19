@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package ticket_item;
+
+option go_package = "campus_acticity_ticketing_system/ticket_base/proto";
+
+message Place {
+  int64 id = 1;
+  string name = 2;
+  string address = 3;
+  int64 area_id = 4;
+  string area_name = 5;
+  int32 x_length = 6;
+  int32 y_length = 7;
+  string latitude = 8;
+  string longitude = 9;
+  string created_time = 10;
+  string updated_time = 11;
+  bool status = 12;
+}
