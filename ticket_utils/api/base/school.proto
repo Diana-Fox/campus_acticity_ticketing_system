@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+package ticket_base;
+
+option go_package = "github.com/Diana-Fox/campus-activity-ticketing-system/ticket_utils/api";
+
+message School {
+    int64 id = 1;
+    string name = 2;
+    string code = 3;
+    float latitude = 4;
+    float longitude = 5;
+    string url=6;
+    string address=7;
+}
+
+service SchoolService {
+    rpc Create(School) returns (EmptyResponse) {}
+    rpc Update(School) returns (EmptyResponse) {}
+    rpc Delete(IdRequest) returns (EmptyResponse) {}
+    rpc GetById(IdRequest) returns (School) {}
+    rpc List(SchoolListRequest) returns (SchoolListResponse) {}
+}
+
+message IdRequest {
+    int64 id = 1;
+}
+
+message EmptyResponse {}
+
+message SchoolListRequest {
+    int32 page = 1;
+    int32 pageSize = 2;
+    string name  = 3;
+}
+
+message SchoolListResponse {
+    repeated School items = 1;
+    int64 total = 2;
+}

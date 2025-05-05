@@ -1,0 +1,81 @@
+syntax = "proto3";
+
+option go_package="github.com/Diana-Fox/Campus-Activity-Ticketing-Syste/api";
+
+//protobuf的package
+package api;
+
+// 场所座位
+message PlaceSeat {
+  int64 id = 1;
+  int64 x = 2;
+  int64 y = 3;
+  int64 activity_id = 4;
+  int32 status = 5;
+}
+
+// 创建座位请求
+message CreatePlaceSeatRequest {
+  PlaceSeat place_seat = 1;
+}
+
+// 创建座位响应
+message CreatePlaceSeatResponse {
+  PlaceSeat place_seat = 1;
+}
+
+// 获取座位请求
+message GetPlaceSeatRequest {
+  int64 id = 1;
+}
+
+// 获取座位响应
+message GetPlaceSeatResponse {
+  PlaceSeat place_seat = 1;
+}
+
+// 更新座位请求
+message UpdatePlaceSeatRequest {
+  PlaceSeat place_seat = 1;
+}
+
+// 更新座位响应
+message UpdatePlaceSeatResponse {
+  PlaceSeat place_seat = 1;
+}
+
+// 删除座位请求
+message DeletePlaceSeatRequest {
+  int64 id = 1;
+}
+
+// 删除座位响应
+message DeletePlaceSeatResponse {}
+
+// 列表查询请求
+message ListPlaceSeatRequest {
+  int64 page_size = 1;
+  int64 page_num = 2;
+  int64 activity_id = 3;  // 按活动ID筛选
+  int32 status = 4;       // 按状态筛选
+}
+
+// 列表查询响应
+message ListPlaceSeatResponse {
+  repeated PlaceSeat place_seats = 1;
+  int64 total = 2;
+}
+
+// 座位服务
+service PlaceSeatService {
+  // 创建座位
+  rpc CreatePlaceSeat(CreatePlaceSeatRequest) returns (CreatePlaceSeatResponse);
+  // 获取座位
+  rpc GetPlaceSeat(GetPlaceSeatRequest) returns (GetPlaceSeatResponse);
+  // 更新座位
+  rpc UpdatePlaceSeat(UpdatePlaceSeatRequest) returns (UpdatePlaceSeatResponse);
+  // 删除座位
+  rpc DeletePlaceSeat(DeletePlaceSeatRequest) returns (DeletePlaceSeatResponse);
+  // 座位列表
+  rpc ListPlaceSeat(ListPlaceSeatRequest) returns (ListPlaceSeatResponse);
+}

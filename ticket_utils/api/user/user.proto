@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+option go_package="github.com/Diana-Fox/campus-activity-ticketing-system/ticket_utils/api";
+
+//protobuf的package
+package api;
+
+service UserService{
+  rpc Register(RegisterRequest) returns(RegisterResponse);//注册
+  rpc LoginByPassword(LoginByPasswordRequest)returns(UserResponse);//登录
+  rpc AddLinkUser(AddLinkUserRequest)returns(RegisterResponse);//添加关联用户
+}
+//注册的变量
+message RegisterRequest{
+  string name = 1;
+  string email = 2;
+  string phone = 3;
+  string CardId = 4;
+  string password = 5;
+  int32 sex=6;
+}
+//注册的返回值
+message RegisterResponse{
+  bool isOk=1;
+}
+message UserResponse{
+//  int64 userId = 1;
+//  string name = 2;
+//  string email = 3;
+//  string phone = 4;
+  string Token =5;
+}
+//通过密码登录
+message LoginByPasswordRequest{
+  //登录方式
+  string email = 1;
+  string phone = 2;
+  string password = 3;
+}
+ message AddLinkUserRequest{
+  string token = 1;
+  repeated  string names= 2;
+}

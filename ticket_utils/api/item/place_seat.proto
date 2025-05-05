@@ -1,0 +1,84 @@
+syntax = "proto3";
+
+option go_package="github.com/Diana-Fox/Campus-Activity-Ticketing-Syste/api";
+
+//protobuf的package
+package api;
+// Place entity
+message Place {
+  int64 id = 1;
+  string name = 2;
+  string address = 3;
+  int64 area_id = 4;
+  string area_name = 5;
+  int32 x_length = 6;
+  int32 y_length = 7;
+  string latitude = 8;
+  string longitude = 9;
+}
+
+// Create place request
+message CreatePlaceRequest {
+  Place place = 1;
+}
+
+// Create place response
+message CreatePlaceResponse {
+  Place place = 1;
+}
+
+// Get place request
+message GetPlaceRequest {
+  int64 id = 1;
+}
+
+// Get place response
+message GetPlaceResponse {
+  Place place = 1;
+}
+
+// Update place request
+message UpdatePlaceRequest {
+  Place place = 1;
+}
+
+// Update place response
+message UpdatePlaceResponse {
+  Place place = 1;
+}
+
+// Delete place request
+message DeletePlaceRequest {
+  int64 id = 1;
+}
+
+// Delete place response
+message DeletePlaceResponse {}
+
+// List places request
+message ListPlaceRequest {
+  int64 page_size = 1;
+  int64 page_num = 2;
+  int64 area_id = 3;     // Filter by area
+  string name = 4;       // Filter by name
+}
+
+// List places response
+message ListPlaceResponse {
+  repeated Place places = 1;
+  int64 total = 2;
+}
+
+// Place service
+service PlaceService {
+  // Create place
+  rpc CreatePlace(CreatePlaceRequest) returns (CreatePlaceResponse);
+  // Get place
+  rpc GetPlace(GetPlaceRequest) returns (GetPlaceResponse);
+  // Update place
+  rpc UpdatePlace(UpdatePlaceRequest) returns (UpdatePlaceResponse);
+  // Delete place
+  rpc DeletePlace(DeletePlaceRequest) returns (DeletePlaceResponse);
+  // List places
+  rpc ListPlace(ListPlaceRequest) returns (ListPlaceResponse);
+}

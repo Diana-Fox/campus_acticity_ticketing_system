@@ -1,0 +1,80 @@
+syntax = "proto3";
+
+option go_package="github.com/Diana-Fox/Campus-Activity-Ticketing-Syste/api";
+
+//protobuf的package
+package api;
+
+
+// 评论实体
+message ItemComment {
+  int64 id = 1;
+  int64 item_id = 2;
+  int64 user_id = 3;
+  int64 score = 4;
+  string content = 5;
+}
+
+// 创建评论请求
+message CreateItemCommentRequest {
+  ItemComment item_comment = 1;
+}
+
+// 创建评论响应
+message CreateItemCommentResponse {
+  ItemComment item_comment = 1;
+}
+
+// 获取评论请求
+message GetItemCommentRequest {
+  int64 id = 1;
+}
+
+// 获取评论响应
+message GetItemCommentResponse {
+  ItemComment item_comment = 1;
+}
+
+// 更新评论请求
+message UpdateItemCommentRequest {
+  ItemComment item_comment = 1;
+}
+
+// 更新评论响应
+message UpdateItemCommentResponse {
+  ItemComment item_comment = 1;
+}
+
+// 删除评论请求
+message DeleteItemCommentRequest {
+  int64 id = 1;
+}
+
+// 删除评论响应
+message DeleteItemCommentResponse {}
+
+// 列表查询请求
+message ListItemCommentRequest {
+  int64 page_size = 1;
+  int64 page_num = 2;
+}
+
+// 列表查询响应
+message ListItemCommentResponse {
+  repeated ItemComment item_comments = 1;
+  int64 total = 2;
+}
+
+// 评论服务
+service ItemCommentService {
+  // 创建评论
+  rpc CreateItemComment(CreateItemCommentRequest) returns (CreateItemCommentResponse);
+  // 获取评论
+  rpc GetItemComment(GetItemCommentRequest) returns (GetItemCommentResponse);
+  // 更新评论
+  rpc UpdateItemComment(UpdateItemCommentRequest) returns (UpdateItemCommentResponse);
+  // 删除评论
+  rpc DeleteItemComment(DeleteItemCommentRequest) returns (DeleteItemCommentResponse);
+  // 评论列表
+  rpc ListItemComment(ListItemCommentRequest) returns (ListItemCommentResponse);
+}

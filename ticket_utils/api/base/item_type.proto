@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+package ticket_base;
+
+option go_package = "github.com/Diana-Fox/campus-activity-ticketing-system/ticket_utils/api";
+
+message ItemType {
+    int64 id = 1;
+    string name = 2;
+    int64 created_time = 3;
+    int64 updated_time = 4;
+    bool status = 5;
+}
+
+service ItemTypeService {
+    rpc Create(ItemType) returns (EmptyResponse) {}
+    rpc Update(ItemType) returns (EmptyResponse) {}
+    rpc Delete(IdRequest) returns (EmptyResponse) {}
+//    rpc GetById(IdRequest) returns (ItemType) {}
+    rpc List(ListRequest) returns (ItemTypeListResponse) {}
+}
+
+message IdRequest {
+    int64 id = 1;
+}
+
+message EmptyResponse {}
+
+message ListRequest {
+    int32 page = 1;
+    int32 page_size = 2;
+}
+
+message ItemTypeListResponse {
+    repeated ItemType items = 1;
+    int32 total = 2;
+}

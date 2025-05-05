@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+package ticket_base;
+
+option go_package = "github.com/Diana-Fox/campus-activity-ticketing-system/ticket_utils/api";
+
+message AreaRequest {
+    int64 id = 1;
+    string name = 2;
+    int64 parentId = 3;
+    int32 level = 4;
+    int64 created_time = 6;
+    int64 updated_time = 7;
+    bool status = 8;
+}
+
+service AreaService {
+    rpc Create(AreaRequest) returns (EmptyResponse) {}
+    rpc Update(AreaRequest) returns (EmptyResponse) {}
+    rpc Delete(IdRequest) returns (EmptyResponse) {}
+    rpc GetById(IdRequest) returns (AreaResponse) {}
+    rpc List(ListRequest) returns (AreaListResponse) {}
+}
+
+message IdRequest {
+    int64 id = 1;
+}
+
+message EmptyResponse {}
+
+message ListRequest {
+}
+
+message AreaListResponse {
+    repeated AreaResponse items = 1;
+}
+message AreaResponse {
+    int64 id = 1;
+    string name = 2;
+    int64 parentId = 3;
+    int32 level = 4;
+    repeated AreaResponse children = 5;
+}

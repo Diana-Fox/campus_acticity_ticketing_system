@@ -1,0 +1,90 @@
+syntax = "proto3";
+
+option go_package="github.com/Diana-Fox/Campus-Activity-Ticketing-Syste/api";
+
+//protobuf的package
+package api;
+
+
+// 活动实体
+message Item {
+  int64 id = 1;
+  string itemName = 2;            //活动名称
+  string abstractMessage = 3;     //活动摘要
+  int64 itemTypeId = 4;         //活动类型id，如论坛啊，通告啊什么的
+  int64 scopeId = 5;             //公共活动、校内活动、校友活动等，以后可能还有别的范围
+  string basicDescription = 6;    //基本描述
+  string projectDescription = 7;  //详细描述
+  string reminderDescription = 8; //温馨提示
+  int32 state = 9;                //活动状态
+  int64 placeId = 10;            //场馆Id
+  int64 commentCount = 11;       //总评论数
+  int64 startTime = 12;          //活动开始日期
+  int64 endTime = 13;            //活动结束日期
+}
+
+// 创建活动请求
+message CreateItemRequest {
+  Item item = 1;
+}
+
+// 创建活动响应
+message CreateItemResponse {
+  Item item = 1;
+}
+
+// 获取活动请求
+message GetItemRequest {
+  int64 id = 1;
+}
+
+// 获取活动响应
+message GetItemResponse {
+  Item item = 1;
+}
+
+// 更新活动请求
+message UpdateItemRequest {
+  Item item = 1;
+}
+
+// 更新活动响应
+message UpdateItemResponse {
+  Item item = 1;
+}
+
+// 删除活动请求
+message DeleteItemRequest {
+  int64 id = 1;
+}
+
+// 删除活动响应
+message DeleteItemResponse {}
+
+// 列表查询请求
+message ListItemRequest {
+  int64 page_size = 1;
+  int64 page_num = 2;
+  int64 item_type_id = 3;  // 可选的活动类型过滤
+  int64 scope_id = 4;      // 可选的范围过滤
+  int32 state = 5;         // 可选的状态过滤
+}
+message EmptyResponse {}
+// 列表查询响应
+message ListItemResponse {
+  repeated Item items = 1;
+  int64 total = 2;
+}
+// 活动服务
+service ItemService {
+  // 创建活动
+  rpc CreateItem(CreateItemRequest) returns (EmptyResponse);
+  // 获取活动
+  rpc GetItem(GetItemRequest) returns (EmptyResponse);
+  // 更新活动
+  rpc UpdateItem(UpdateItemRequest) returns (UpdateItemResponse);
+  // 删除活动
+  rpc DeleteItem(DeleteItemRequest) returns (EmptyResponse);
+  // 活动列表
+  rpc ListItem(ListItemRequest) returns (ListItemResponse);
+}
